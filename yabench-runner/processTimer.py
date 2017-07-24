@@ -42,7 +42,7 @@ class ProcessTimer:
       for descendant in descendants:
         try:
 		  #details: https://code.google.com/p/psutil/wiki/Documentation
-          mem_info = descendant.get_memory_info()
+          mem_info = descendant.memory_info()
 
           rss_memory += (mem_info[0] / 1024 / 1024)
           
