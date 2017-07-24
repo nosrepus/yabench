@@ -33,7 +33,7 @@ class ProcessTimer:
       pp = psutil.Process(self.p.pid)
 
       #obtain a list of the subprocess and all its descendants
-      descendants = list(pp.get_children(recursive=True))
+      descendants = list(pp.children(recursive=True))
       descendants = descendants + [pp]
 
       rss_memory = 0
