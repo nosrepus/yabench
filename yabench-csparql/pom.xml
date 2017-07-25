@@ -12,11 +12,17 @@
     <name>yabench-csparql</name>
     
     <repositories>
+        <!--
         <repository>
             <id>streamreasoning_repository</id>
             <name>Csparql server repository</name>
             <url>http://streamreasoning.org/maven/</url>
             <layout>default</layout>
+        </repository>
+        -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
     <build>
@@ -76,10 +82,16 @@
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
+        <!---
         <dependency>
             <groupId>eu.larkc.csparql</groupId>
             <artifactId>csparql-core</artifactId>
             <version>0.9.5</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>com.github.nosrepus</groupId>
+            <artifactId>CSPARQL-ENGINE</artifactId>
         </dependency>
         <dependency>
             <groupId>io.github.yabench</groupId>
