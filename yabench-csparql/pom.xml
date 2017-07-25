@@ -92,6 +92,7 @@
         <dependency>
             <groupId>com.github.nosrepus</groupId>
             <artifactId>CSPARQL-ENGINE</artifactId>
+	    <version>d36dd4b318</version>
         </dependency>
         <dependency>
             <groupId>io.github.yabench</groupId>
