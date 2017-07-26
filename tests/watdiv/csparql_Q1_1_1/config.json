@@ -5,20 +5,20 @@
   "duration": "5m",
   "seed": "123123123",
   "vars": {
-    "WSIZE": "60s",
-    "WSLIDE": "60s",
+    "WSIZE": "10s",
+    "WSLIDE": "1s",
     "WPOLICY": "onwindowclose"
   },
   "tests": [
     {
       "name": "1",
-      "inputstream": "",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream.txt",
       "interval": "1m",
       "graceful": "false"
     },
     {
       "name": "2",
-      "inputstream": "",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream.txt",
       "interval": "1m"
     }
   ]

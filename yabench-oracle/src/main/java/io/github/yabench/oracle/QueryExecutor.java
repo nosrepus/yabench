@@ -61,7 +61,7 @@ public class QueryExecutor {
             }
             sr.close();
         }
-
+        System.out.print("test-------------------------------------:"+m.size()+"\n");
         input.getModel().add(m);
 
         try (QueryExecution qexec = QueryExecutionFactory.create(query, input.getModel())) {
