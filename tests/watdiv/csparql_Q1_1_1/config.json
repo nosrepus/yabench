@@ -2,11 +2,11 @@
     "exec.engine": "yabench-csparql/target/yabench-csparql-1.0-SNAPSHOT-jar-with-dependencies.jar",
     "exec.oracle": "yabench-oracle/target/yabench-oracle-1.0-SNAPSHOT-jar-with-dependencies.jar",
 
-  "duration": "5m",
+  "duration": "2m",
   "seed": "123123123",
   "vars": {
-    "WSIZE": "10s",
-    "WSLIDE": "1s",
+    "WSIZE": "60s",
+    "WSLIDE": "60s",
     "WPOLICY": "onwindowclose"
   },
   "tests": [
