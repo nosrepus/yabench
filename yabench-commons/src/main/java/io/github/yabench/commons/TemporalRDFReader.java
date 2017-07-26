@@ -47,6 +47,20 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
     public TemporalTriple readNextTriple() throws IOException {
         final String line = reader.readLine();
         if (line != null) {
+
+            String[] tuple = line.split("\t");
+            Resource subject = ResourceFactory.createResource(tuple[0]);
+            Property predicate = ResourceFactory.createProperty(tuple[1]);
+            RDFNode object = createObject(tuple[2]);
+
+            Statement stmt = ResourceFactory.createStatement(
+                    subject, predicate, object);
+
+            long time = 0;
+
+            return new TemporalTriple(stmt, time);
+
+/*
             String[] tuple = line.split(SPACE, TUPLE_SIZE + 1);
             Resource subject = ResourceFactory.createResource(
                     tuple[0].substring(1, tuple[0].length() - 1));
@@ -60,6 +74,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
                     .substring(1, tuple[TUPLE_SIZE - 1].length() - 1));
 
             return new TemporalTriple(stmt, time);
+*/
         } else {
             return null;
         }
