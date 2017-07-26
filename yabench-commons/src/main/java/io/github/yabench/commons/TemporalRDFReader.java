@@ -89,6 +89,17 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
         for (;;) {
             final TemporalTriple triple = readNextTriple();
             if (triple != null) {
+                triples.add(triple);
+                lastTriple = triple;
+            } else {
+                lastTriple = null;
+                break;
+            }
+        }
+        /*
+        for (;;) {
+            final TemporalTriple triple = readNextTriple();
+            if (triple != null) {
                 if (lastTriple == null) {
                     triples.add(triple);
                     lastTriple = triple;
@@ -107,6 +118,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
                 break;
             }
         }
+        */
         return triples.isEmpty() ? null : new TemporalGraph(triples);
     }
 

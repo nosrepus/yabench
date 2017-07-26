@@ -1,0 +1,4 @@
+SELECT *
+WHERE {
+    ?V0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?V1 .
+}

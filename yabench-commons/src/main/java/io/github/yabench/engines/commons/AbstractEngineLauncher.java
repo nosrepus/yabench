@@ -78,6 +78,40 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					serializer.initialize();
 					logger.info("started sending triples at {}", Instant.now());
 					while ((graph = reader.readNextGraph()) != null) {
+						Thread.sleep(100);
+						for (TemporalTriple triple : graph.getTriples()) {
+							executor.execute(new Runnable() {
+								@Override
+								public void run() {
+									engine.stream(triple.getStatement());
+								}
+							});
+							//engine.stream(triple.getStatement());
+						}
+						//logger.info("streamed graph with t: " + graph.getTime());
+					}
+
+					logger.info("stopped sending triples at {}", Instant.now());
+
+					executor.shutdown();
+					//executor.shutdownNow();
+					executor.awaitTermination(500, TimeUnit.MINUTES);
+					t.interrupt();
+					onInputStreamEnd();
+
+					logger.info("stopped the engine at {}", Instant.now());
+				}
+				/*
+				try (Engine engine = engineFactory.create()) {
+					engine.initialize();
+					final ResultSerializer serializer = new ResultSerializer(writer);
+					TemporalGraph graph;
+					long t1 = 0, t2 = 0, time = 0, sleep = 0;
+					engine.registerQuery(query, serializer);
+					Thread.sleep(1000); //provide setup time for the engine before starting to stream
+					serializer.initialize();
+					logger.info("started sending triples at {}", Instant.now());
+					while ((graph = reader.readNextGraph()) != null) {
 						t1 = (System.nanoTime() - t2) / 1000000;
 						sleep = graph.getTime() - time - t1 < 0 ? graph.getTime() - time : graph.getTime() - time - t1;
 						Thread.sleep(sleep);
@@ -105,6 +139,7 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 
 					logger.info("stopped the engine at {}", Instant.now());
 				}
+				*/
 			}
 		} catch (ParseException ex) {
 			printHelp(options, ex.getMessage());

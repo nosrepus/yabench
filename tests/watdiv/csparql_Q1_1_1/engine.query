@@ -1,0 +1,7 @@
+REGISTER QUERY test AS
+
+SELECT *
+FROM STREAM <http://ex.org/streams/test> [RANGE ${WSIZE} STEP ${WSLIDE}]
+WHERE {
+    ?V0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?V1 .
+}
