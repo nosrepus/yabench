@@ -116,8 +116,18 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
      */
     private RDFNode createObject(String tuple) {
         //if it is datatyped...
+        if (tuple.contains("\"")) {
+            String objectString = tuple.substring(1, tuple.length()-1);
+            return ResourceFactory.createTypedLiteral(objectString);
+        } else {
+            return ResourceFactory.createResource(
+                    tuple);
+        }
+
+
+        /*
         if (tuple.contains("^^")) {
-            String[] objectSplit = tuple.split("\\^\\^");
+            String[] objectSplit = tuple.split("\"");
             String objectString = objectSplit[0];
             String dtype = objectSplit[1];
 
@@ -132,6 +142,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
             return ResourceFactory.createResource(
                     tuple.substring(1, tuple.length() - 1));
         }
+        */
 
     }
 

@@ -16,6 +16,7 @@ public class RDFStreamReaderTest {
                 + "http://purl.org/stuff/rev#text\t"
                 + "\"Hartline environment's Marcy's hereupon curt ran propellers\"\t"
                 + "0.000014";
+
         StringReader input = new StringReader(stream);
         TemporalRDFReader reader = new TemporalRDFReader(input);
 
