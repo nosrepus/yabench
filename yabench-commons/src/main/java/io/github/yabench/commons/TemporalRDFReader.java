@@ -91,6 +91,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
             if (triple != null) {
                 triples.add(triple);
                 lastTriple = triple;
+                break;
             } else {
                 lastTriple = null;
                 break;
