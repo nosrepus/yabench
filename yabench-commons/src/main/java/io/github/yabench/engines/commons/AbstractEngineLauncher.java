@@ -88,7 +88,7 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 							});
 							//engine.stream(triple.getStatement());
 						}
-						logger.info("streamed graph with t: ");
+						//logger.info("streamed graph with t: ");
 					}
 
 					logger.info("stopped sending triples at {}", Instant.now());
