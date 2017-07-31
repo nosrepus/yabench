@@ -5,7 +5,7 @@
   "duration": "2m",
   "seed": "123123123",
   "vars": {
-    "WSIZE": "10s",
+    "WSIZE": "20s",
     "WSLIDE": "10s",
     "WPOLICY": "onwindowclose"
   },
