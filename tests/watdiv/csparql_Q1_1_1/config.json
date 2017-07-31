@@ -5,21 +5,22 @@
   "duration": "2m",
   "seed": "123123123",
   "vars": {
-    "WSIZE": "60s",
-    "WSLIDE": "60s",
+    "WSIZE": "10s",
+    "WSLIDE": "10s",
     "WPOLICY": "onwindowclose"
   },
   "tests": [
     {
       "name": "1",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream.txt",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream_1ms.txt",
       "interval": "1m",
       "graceful": "false"
     },
     {
       "name": "2",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream.txt",
-      "interval": "1m"
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream_1ms.txt",
+      "interval": "1m",
+      "graceful": "true"
     }
   ]
 }

@@ -78,7 +78,10 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					serializer.initialize();
 					logger.info("started sending triples at {}", Instant.now());
 					while ((graph = reader.readNextGraph()) != null) {
-						Thread.sleep(1);
+						t1 = (System.nanoTime() - t2) / 1000000;
+						sleep = graph.getTime() - time - t1 < 0 ? graph.getTime() - time : graph.getTime() - time - t1;
+						Thread.sleep(sleep);
+						t2 = System.nanoTime();
 						for (TemporalTriple triple : graph.getTriples()) {
 							executor.execute(new Runnable() {
 								@Override
@@ -88,7 +91,8 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 							});
 							//engine.stream(triple.getStatement());
 						}
-						logger.info("streamed graph with t: ");
+						//logger.info("streamed graph with t: ");
+						time = graph.getTime();
 					}
 
 					logger.info("stopped sending triples at {}", Instant.now());
