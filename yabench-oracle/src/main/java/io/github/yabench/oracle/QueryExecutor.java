@@ -23,18 +23,12 @@ import java.util.Properties;
 public class QueryExecutor {
 
     private final Query query;
+    private static Model m;
 
     public QueryExecutor(final String template, final Properties variables) {
         this.query = QueryFactory.create(resolveVars(template, variables));
-    }
-
-    static {
-        registerCustomAggregates();
-    }
-
-    public BindingWindow executeSelect(final TripleWindow input) {
         String static_file = "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/1-1.ttl";
-        Model m = ModelFactory.createDefaultModel();
+        m = ModelFactory.createDefaultModel();
         try{
             InputStream in = FileManager.get().open(static_file);
             if(in == null){
@@ -61,7 +55,13 @@ public class QueryExecutor {
             }
             sr.close();
         }
-        System.out.print("test-------------------------------------:"+m.size()+"\n");
+    }
+
+    static {
+        registerCustomAggregates();
+    }
+
+    public BindingWindow executeSelect(final TripleWindow input) {
         input.getModel().add(m);
 
         try (QueryExecution qexec = QueryExecutionFactory.create(query, input.getModel())) {
