@@ -13,6 +13,7 @@ import com.hp.hpl.jena.sparql.expr.aggregate.AggregateRegistry;
 import com.hp.hpl.jena.util.FileManager;
 import io.github.yabench.commons.utils.NodeUtils;
 import io.github.yabench.oracle.sparql.AccAvg;
+import org.apache.jena.atlas.logging.Log;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -62,9 +63,10 @@ public class QueryExecutor {
     }
 
     public BindingWindow executeSelect(final TripleWindow input) {
-        input.getModel().add(m);
-
-        try (QueryExecution qexec = QueryExecutionFactory.create(query, input.getModel())) {
+        Model data = ModelFactory.createDefaultModel();
+        data.add(input.getModel());
+        data.add(m);
+        try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
             ResultSet results = qexec.execSelect();
             final List<Binding> bindings = new ArrayList<>();
             while (results.hasNext()) {

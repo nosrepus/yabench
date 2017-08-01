@@ -2,7 +2,6 @@
     "exec.engine": "yabench-csparql/target/yabench-csparql-1.0-SNAPSHOT-jar-with-dependencies.jar",
     "exec.oracle": "yabench-oracle/target/yabench-oracle-1.0-SNAPSHOT-jar-with-dependencies.jar",
 
-  "duration": "2m",
   "seed": "123123123",
   "vars": {
     "WSIZE": "20s",
@@ -12,14 +11,12 @@
   "tests": [
     {
       "name": "1",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream_1ms.txt",
-      "interval": "1m",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/tiny_100ms.txt",
       "graceful": "false"
     },
     {
       "name": "2",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/stream_1ms.txt",
-      "interval": "1m",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/tiny_100ms.txt",
       "graceful": "true"
     }
   ]
