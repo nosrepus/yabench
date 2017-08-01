@@ -3,6 +3,7 @@
     "exec.oracle": "yabench-oracle/target/yabench-oracle-1.0-SNAPSHOT-jar-with-dependencies.jar",
 
   "seed": "123123123",
+  "boxplots": "true",
   "vars": {
     "WSIZE": "20s",
     "WSLIDE": "10s",

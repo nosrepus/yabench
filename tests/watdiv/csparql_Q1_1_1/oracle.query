@@ -1,8 +1,4 @@
 SELECT *
 WHERE {
     ?V0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?V1 .
-    ?V0 <http://purl.org/dc/terms/Location> ?V3 .
-    ?V0 <http://xmlns.com/foaf/age> ?V4 .
-    ?V0 <http://db.uwaterloo.ca/~galuc/wsdbm/gender> ?V5 .
-    ?V0 <http://xmlns.com/foaf/givenName> ?V6 .
 }
