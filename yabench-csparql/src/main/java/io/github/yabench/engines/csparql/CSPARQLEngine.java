@@ -33,7 +33,7 @@ public class CSPARQLEngine extends AbstractEngine {
     public void initialize() {
         engine.initialize();
         engine.registerStream(stream);
-        engine.putStaticNamedModel("http://github.com/nosrepus/UWaterloo-WatDiv/raw/master/tiny.ttl", "/home/l36gao/UWaterloo-WatDiv/bin/Release/100-1/100-1.ttl");
+        engine.putStaticNamedModel("http://github.com/nosrepus/UWaterloo-WatDiv/raw/master/tiny.ttl", "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/1-1.ttl");
     }
 
     @Override
