@@ -3,21 +3,22 @@
     "exec.oracle": "yabench-oracle/target/yabench-oracle-1.0-SNAPSHOT-jar-with-dependencies.jar",
 
   "seed": "123123123",
+  "runs": "2",
   "boxplots": "true",
   "vars": {
     "WSIZE": "20s",
-    "WSLIDE": "10s",
+    "WSLIDE": "5s",
     "WPOLICY": "onwindowclose"
   },
   "tests": [
     {
       "name": "1",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/tiny_100ms.txt",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/60-stream-100-1-10ms.txt",
       "graceful": "false"
     },
     {
       "name": "2",
-      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/tiny_100ms.txt",
+      "inputstream": "/home/l36gao/yabench/tests/watdiv/csparql_Q1_1_1/60-stream-100-1-10ms.txt",
       "graceful": "true"
     }
   ]

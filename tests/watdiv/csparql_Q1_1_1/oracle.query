@@ -1,4 +1,6 @@
 SELECT *
 WHERE {
-    ?V0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?V1 .
+	?v0	<http://www.geonames.org/ontology#parentCountry>	?v1 .
+	?v2	<http://db.uwaterloo.ca/~galuc/wsdbm/likes>	?v3 .
+	?v2	<http://schema.org/nationality>	?v1 .
 }
