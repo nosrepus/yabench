@@ -70,6 +70,18 @@ public class OnWindowCloseComparator implements OracleComparator {
 					logger.info("precision: " + prevfMeasure.getPrecisionScore());
 					logger.info("recall: " + prevfMeasure.getRecallScore());
 					logger.info("wsize: " + inputWindow.getTriples().size());
+					if(prevfMeasure.getNotFoundReferences().size()!=0){
+						logger.info("----------------------notfound-----------------");
+						for(Object b : prevfMeasure.getNotFoundReferences()){
+							logger.info("NotFound: "+b.toString());
+						}
+					}
+					if(prevfMeasure.getExtraReferences().size()!=0){
+						logger.info("----------------------extra-----------------");
+						for(Object b : prevfMeasure.getExtraReferences()){
+							logger.info("Extra: "+b.toString());
+						}
+					}
 					long delay = actual.getEnd() - expected.getEnd();
 
 					if (!(expected.getBindings().size() == 0 && actual.getBindings().size() == 0)) {

@@ -36,6 +36,10 @@ public final class FMeasure {
      */
     private final List<Object> notFoundReferences = new ArrayList<>();
 
+    private final List<Object> extraReferences = new ArrayList<>();
+
+    public List<Object> getExtraReferences(){return extraReferences;}
+
     /**
      * Retrieves the arithmetic mean of the precision scores calculated for each
      * evaluated sample.
@@ -160,6 +164,7 @@ public final class FMeasure {
                 notFoundReferences.add(referenceName);
             }
         }
+        Collections.addAll(extraReferences, predListSpans);
         return truePositives;
     }
 }
