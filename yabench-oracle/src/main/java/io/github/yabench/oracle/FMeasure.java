@@ -142,6 +142,7 @@ public final class FMeasure {
     private int countTruePositives(final Object[] references, 
             final Object[] predictions) {
         notFoundReferences.clear();
+        extraReferences.clear();
         
         final List<Object> predListSpans = new ArrayList<>(predictions.length);
         Collections.addAll(predListSpans, predictions);
@@ -164,7 +165,10 @@ public final class FMeasure {
                 notFoundReferences.add(referenceName);
             }
         }
-        Collections.addAll(extraReferences, predListSpans);
+        for(Object item : predListSpans){
+            extraReferences.add(item);
+        }
+        //Collections.addAll(extraReferences, predListSpans);
         return truePositives;
     }
 }

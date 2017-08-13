@@ -71,13 +71,13 @@ public class OnWindowCloseComparator implements OracleComparator {
 					logger.info("recall: " + prevfMeasure.getRecallScore());
 					logger.info("wsize: " + inputWindow.getTriples().size());
 					if(prevfMeasure.getNotFoundReferences().size()!=0){
-						logger.info("----------------------notfound-----------------");
+						logger.info("----------------------notfound-----------------: " + prevfMeasure.getNotFoundReferences().size());
 						for(Object b : prevfMeasure.getNotFoundReferences()){
 							logger.info("NotFound: "+b.toString());
 						}
 					}
 					if(prevfMeasure.getExtraReferences().size()!=0){
-						logger.info("----------------------extra-----------------");
+						logger.info("----------------------extra-----------------: "+ prevfMeasure.getExtraReferences().size());
 						for(Object b : prevfMeasure.getExtraReferences()){
 							logger.info("Extra: "+b.toString());
 						}
