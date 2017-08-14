@@ -56,12 +56,12 @@ public class OnWindowCloseComparator implements OracleComparator {
 					BindingWindow expected = queryExecutor.executeSelect(inputWindow);
 					final FMeasure fMeasure = new FMeasure().calculateScores(expected.getBindings(), actual.getBindings());
 					FMeasure prevfMeasure = fMeasure;
-
+/*
 					if (!prevfMeasure.getNotFoundReferences().isEmpty()) {
 						logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
 						logger.info("missing triples");
 					}
-
+*/
 					long startshift = (i * windowFactory.getSlide().toMillis()) - windowFactory.getSize().toMillis();
 					long endshift = (i * windowFactory.getSlide().toMillis());
 
@@ -72,12 +72,14 @@ public class OnWindowCloseComparator implements OracleComparator {
 					logger.info("wsize: " + inputWindow.getTriples().size());
 					if(prevfMeasure.getNotFoundReferences().size()!=0){
 						logger.info("----------------------notfound-----------------: " + prevfMeasure.getNotFoundReferences().size());
+						logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
 						for(Object b : prevfMeasure.getNotFoundReferences()){
 							logger.info("NotFound: "+b.toString());
 						}
 					}
 					if(prevfMeasure.getExtraReferences().size()!=0){
 						logger.info("----------------------extra-----------------: "+ prevfMeasure.getExtraReferences().size());
+						logger.info("Window #{} [{}:{}]. Extra triples:", i, window.getStart(), window.getEnd());
 						for(Object b : prevfMeasure.getExtraReferences()){
 							logger.info("Extra: "+b.toString());
 						}
