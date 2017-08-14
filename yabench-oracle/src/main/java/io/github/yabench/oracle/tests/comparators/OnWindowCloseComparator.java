@@ -65,23 +65,24 @@ public class OnWindowCloseComparator implements OracleComparator {
 					long startshift = (i * windowFactory.getSlide().toMillis()) - windowFactory.getSize().toMillis();
 					long endshift = (i * windowFactory.getSlide().toMillis());
 
+					logger.info("Window #{} [{}:{}].", i, window.getStart(), window.getEnd());
 					logger.info("expected bindings size: " + String.valueOf(expected.getBindings().size()));
 					logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
 					logger.info("precision: " + prevfMeasure.getPrecisionScore());
 					logger.info("recall: " + prevfMeasure.getRecallScore());
 					logger.info("wsize: " + inputWindow.getTriples().size());
 					logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-					logger.info("expected start: "+expected.getEnd()+" end: "+expected.getEnd());
+					logger.info("expected start: "+expected.getStart()+" end: "+expected.getEnd());
 					if(prevfMeasure.getNotFoundReferences().size()!=0){
 						logger.info("----------------------notfound-----------------: " + prevfMeasure.getNotFoundReferences().size());
-						logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
+						//logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
 						for(Object b : prevfMeasure.getNotFoundReferences()){
 							logger.info("NotFound: "+b.toString());
 						}
 					}
 					if(prevfMeasure.getExtraReferences().size()!=0){
 						logger.info("----------------------extra-----------------: "+ prevfMeasure.getExtraReferences().size());
-						logger.info("Window #{} [{}:{}]. Extra triples:", i, window.getStart(), window.getEnd());
+						//logger.info("Window #{} [{}:{}]. Extra triples:", i, window.getStart(), window.getEnd());
 						for(Object b : prevfMeasure.getExtraReferences()){
 							logger.info("Extra: "+b.toString());
 						}
