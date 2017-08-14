@@ -113,6 +113,7 @@ public class OnWindowCloseComparator implements OracleComparator {
 									} else if (newfMeasure.getRecallScore() == 1) {
 										startshift = ts;
 										prevfMeasure = newfMeasure;
+										logger.info("update:");
 										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
 										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
 										logger.info("precision: " + prevfMeasure.getPrecisionScore());
@@ -125,14 +126,6 @@ public class OnWindowCloseComparator implements OracleComparator {
 									} else if (newfMeasure.getRecallScore() >= prevfMeasure.getRecallScore()) {
 										startshift = ts;
 										prevfMeasure = newfMeasure;
-										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
-										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
-										logger.info("precision: " + prevfMeasure.getPrecisionScore());
-										logger.info("recall: " + prevfMeasure.getRecallScore());
-										logger.info("wsize: " + inputWindow.getTriples().size());
-										logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-										logger.info("expected start: "+expectedShift.getEnd()+" end: "+expectedShift.getEnd());
-
 									}
 
 								}
@@ -158,6 +151,7 @@ public class OnWindowCloseComparator implements OracleComparator {
 									} else if (newfMeasure.getPrecisionScore() == 1) {
 										endshift = endts;
 										prevfMeasure = newfMeasure;
+										logger.info("update:");
 										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
 										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
 										logger.info("precision: " + prevfMeasure.getPrecisionScore());
@@ -170,14 +164,6 @@ public class OnWindowCloseComparator implements OracleComparator {
 									} else if (newfMeasure.getPrecisionScore() >= prevfMeasure.getPrecisionScore()) {
 										endshift = endts;
 										prevfMeasure = newfMeasure;
-										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
-										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
-										logger.info("precision: " + prevfMeasure.getPrecisionScore());
-										logger.info("recall: " + prevfMeasure.getRecallScore());
-										logger.info("wsize: " + inputWindow.getTriples().size());
-										logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-										logger.info("expected start: "+expectedShift.getEnd()+" end: "+expectedShift.getEnd());
-
 									}
 								} else {
 									logger.info("Window cannot be shifted back anymore, because there are no more triples in the stream to get the timestamp from.");
