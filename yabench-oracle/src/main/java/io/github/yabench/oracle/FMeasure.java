@@ -139,7 +139,7 @@ public final class FMeasure {
      * @param predictions the predictions
      * @return number of true positives
      */
-    private int countTruePositives(final Object[] references, 
+    private int countTruePositives(final Object[] references,
             final Object[] predictions) {
         notFoundReferences.clear();
         extraReferences.clear();
