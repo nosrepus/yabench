@@ -3,7 +3,7 @@ REGISTER QUERY test AS
 SELECT *
 FROM STREAM <http://ex.org/streams/test> [RANGE ${WSIZE} STEP ${WSLIDE}]
 WHERE {
-	?v0	<http://www.geonames.org/ontology#parentCountry>	?v1 .
+	?v0	<http://www.geonames.org/ontology#parentCountry>	<http://db.uwaterloo.ca/~galuc/wsdbm/City132> .
 	?v2	<http://db.uwaterloo.ca/~galuc/wsdbm/likes>	?v3 .
 	?v2	<http://schema.org/nationality>	?v1 .
 }

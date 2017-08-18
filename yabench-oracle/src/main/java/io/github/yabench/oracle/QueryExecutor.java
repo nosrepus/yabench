@@ -28,7 +28,7 @@ public class QueryExecutor {
 
     public QueryExecutor(final String template, final Properties variables) {
         this.query = QueryFactory.create(resolveVars(template, variables));
-        String static_file = "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/1-1.ttl";
+        String static_file = "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-10/1-10.ttl";
         m = ModelFactory.createDefaultModel();
         try{
             InputStream in = FileManager.get().open(static_file);
