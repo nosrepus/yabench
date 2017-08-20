@@ -13,7 +13,7 @@
   "tests": [
     {
       "name": "1",
-      "inputstream": "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-10/ts-stream.txt",
+      "inputstream": "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/ts-stream.txt",
       "graceful": "false"
     }
   ]

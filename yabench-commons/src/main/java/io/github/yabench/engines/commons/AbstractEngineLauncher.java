@@ -75,7 +75,7 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					long t1 = 0, t2 = 0, time = 0, sleep = 0;
 					logger.info("querystring: "+query.getQueryString());
 					engine.registerQuery(query, serializer);
-					Thread.sleep(80000); //provide setup time for the engine before starting to stream
+					Thread.sleep(60000); //provide setup time for the engine before starting to stream
 					serializer.initialize();
 					logger.info("started sending triples at {}", Instant.now());
 					while ((graph = reader.readNextGraph()) != null) {
