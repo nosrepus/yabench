@@ -90,6 +90,8 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 									engine.stream(triple.getStatement());
 								}
 							});
+							logger.info("-----------------------triple-------------------------");
+							logger.info(triple.toString());
 							//engine.stream(triple.getStatement());
 						}
 						//logger.info("streamed graph with t: "+System.nanoTime() + " "+graph.getTriples().size()+" "+ graph.getTriples().get(0).toString());

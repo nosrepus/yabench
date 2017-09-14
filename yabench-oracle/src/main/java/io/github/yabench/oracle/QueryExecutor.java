@@ -28,6 +28,8 @@ public class QueryExecutor {
 
     public QueryExecutor(final String template, final Properties variables) {
         this.query = QueryFactory.create(resolveVars(template, variables));
+
+/*
         String static_file = "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/1-1.ttl";
         m = ModelFactory.createDefaultModel();
         try{
@@ -56,6 +58,7 @@ public class QueryExecutor {
             }
             sr.close();
         }
+*/
     }
 
     static {
@@ -65,7 +68,7 @@ public class QueryExecutor {
     public BindingWindow executeSelect(final TripleWindow input) {
         Model data = ModelFactory.createDefaultModel();
         data.add(input.getModel());
-        data.add(m);
+//        data.add(m);
         try (QueryExecution qexec = QueryExecutionFactory.create(query, data)) {
             ResultSet results = qexec.execSelect();
             final List<Binding> bindings = new ArrayList<>();
