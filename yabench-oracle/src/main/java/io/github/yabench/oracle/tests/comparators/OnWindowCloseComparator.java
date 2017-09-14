@@ -73,6 +73,7 @@ public class OnWindowCloseComparator implements OracleComparator {
 					logger.info("wsize: " + inputWindow.getTriples().size());
 					logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
 					logger.info("expected start: "+expected.getStart()+" end: "+expected.getEnd());
+/*
 					if(prevfMeasure.getNotFoundReferences().size()!=0){
 						logger.info("----------------------notfound-----------------: " + prevfMeasure.getNotFoundReferences().size());
 						//logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
@@ -87,6 +88,7 @@ public class OnWindowCloseComparator implements OracleComparator {
 							logger.info("Extra: "+b.toString());
 						}
 					}
+*/
 					long delay = actual.getEnd() - expected.getEnd();
 
 					if (!(expected.getBindings().size() == 0 && actual.getBindings().size() == 0)) {
