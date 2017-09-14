@@ -59,7 +59,6 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
             long time = Long.parseLong(tuple[3]);
 
             return new TemporalTriple(stmt, time);
-
             /*
             String[] tuple = line.split(SPACE, TUPLE_SIZE + 1);
             Resource subject = ResourceFactory.createResource(
