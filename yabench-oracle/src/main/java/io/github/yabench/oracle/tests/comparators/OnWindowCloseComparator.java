@@ -1,5 +1,6 @@
 package io.github.yabench.oracle.tests.comparators;
 
+import com.hp.hpl.jena.sparql.core.Var;
 import io.github.yabench.commons.TemporalTriple;
 import io.github.yabench.oracle.BindingWindow;
 import io.github.yabench.oracle.readers.EngineResultsReader;
@@ -13,6 +14,8 @@ import io.github.yabench.oracle.Window;
 import io.github.yabench.oracle.WindowFactory;
 import io.github.yabench.oracle.readers.TripleWindowReader;
 
+import java.util.Iterator;
+import java.io.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.TreeSet;
@@ -31,6 +34,8 @@ public class OnWindowCloseComparator implements OracleComparator {
 	private final QueryExecutor queryExecutor;
 	private final OracleResultsWriter oracleResultsWriter;
 	private final boolean graceful;
+	private Writer writer = null;
+	private Writer actual_writer = null;	
 
 	OnWindowCloseComparator(BufferedTWReader inputStreamReader, EngineResultsReader queryResultsReader, WindowFactory windowFactory,
 			QueryExecutor queryExecutor, OracleResultsWriter oracleResultsWriter, boolean graceful) {
@@ -40,6 +45,12 @@ public class OnWindowCloseComparator implements OracleComparator {
 		this.queryExecutor = queryExecutor;
 		this.oracleResultsWriter = oracleResultsWriter;
 		this.graceful = graceful;
+		try{
+			this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("oracle_result.txt"), "utf-8"));
+			this.actual_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("actual_result.txt"), "utf-8"));
+		}catch(Exception ex){
+
+		}
 	}
 
 	@Override
@@ -48,47 +59,47 @@ public class OnWindowCloseComparator implements OracleComparator {
 		for (int i = 1;; i++) {
 			final Window window = windowFactory.nextWindow();
 			final BindingWindow actual = queryResultsReader.next();
+			for(Binding b: actual.getBindings()){
+				Iterator<Var> it = b.vars();
+				while(it.hasNext()){
+					actual_writer.write(b.get(it.next()).toString()+'\t');	
+				}
+				actual_writer.write('\n');
+			}
+			actual_writer.flush();
 			if (actual != null) {
 				inputStreamReader.purge(window.getStart());
 				final TripleWindow inputWindow = inputStreamReader.readNextWindow(window);
-
+				//logger.info("window: "+inputWindow);
 				if (inputWindow != null) {
 					BindingWindow expected = queryExecutor.executeSelect(inputWindow);
+					//logger.info("expected: "+expected.getBindings().size());
+					//writer.write("start");
+					
+					for(Binding b: expected.getBindings()){
+						Iterator<Var> it = b.vars();
+						while(it.hasNext()){
+							writer.write(b.get(it.next()).toString()+'\t');
+						}
+						writer.write('\n');						
+					}
+					writer.flush();
 					final FMeasure fMeasure = new FMeasure().calculateScores(expected.getBindings(), actual.getBindings());
 					FMeasure prevfMeasure = fMeasure;
-/*
+
 					if (!prevfMeasure.getNotFoundReferences().isEmpty()) {
 						logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
 						logger.info("missing triples");
 					}
-*/
+
 					long startshift = (i * windowFactory.getSlide().toMillis()) - windowFactory.getSize().toMillis();
 					long endshift = (i * windowFactory.getSlide().toMillis());
 
-					logger.info("Window #{} [{}:{}].", i, window.getStart(), window.getEnd());
 					logger.info("expected bindings size: " + String.valueOf(expected.getBindings().size()));
 					logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
 					logger.info("precision: " + prevfMeasure.getPrecisionScore());
 					logger.info("recall: " + prevfMeasure.getRecallScore());
 					logger.info("wsize: " + inputWindow.getTriples().size());
-					logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-					logger.info("expected start: "+expected.getStart()+" end: "+expected.getEnd());
-/*
-					if(prevfMeasure.getNotFoundReferences().size()!=0){
-						logger.info("----------------------notfound-----------------: " + prevfMeasure.getNotFoundReferences().size());
-						//logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
-						for(Object b : prevfMeasure.getNotFoundReferences()){
-							logger.info("NotFound: "+b.toString());
-						}
-					}
-					if(prevfMeasure.getExtraReferences().size()!=0){
-						logger.info("----------------------extra-----------------: "+ prevfMeasure.getExtraReferences().size());
-						//logger.info("Window #{} [{}:{}]. Extra triples:", i, window.getStart(), window.getEnd());
-						for(Object b : prevfMeasure.getExtraReferences()){
-							logger.info("Extra: "+b.toString());
-						}
-					}
-*/
 					long delay = actual.getEnd() - expected.getEnd();
 
 					if (!(expected.getBindings().size() == 0 && actual.getBindings().size() == 0)) {
@@ -108,23 +119,15 @@ public class OnWindowCloseComparator implements OracleComparator {
 										// i, ts, this.windowFactory.getSize()
 										// .toMillis(),
 										// newfMeasure.getNotFoundReferences());
-										//logger.info("missing triples!");
+										logger.info("missing triples!");
 									}
 
 									if (newfMeasure.getRecallScore() < prevfMeasure.getRecallScore()) {
 										break;
 									} else if (newfMeasure.getRecallScore() == 1) {
 										startshift = ts;
-										prevfMeasure = newfMeasure;
-										logger.info("update:");
-										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
-										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
-										logger.info("precision: " + prevfMeasure.getPrecisionScore());
-										logger.info("recall: " + prevfMeasure.getRecallScore());
-										logger.info("wsize: " + inputWindow.getTriples().size());
-										logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-										logger.info("expected start: "+expectedShift.getEnd()+" end: "+expectedShift.getEnd());
 
+										prevfMeasure = newfMeasure;
 										break;
 									} else if (newfMeasure.getRecallScore() >= prevfMeasure.getRecallScore()) {
 										startshift = ts;
@@ -154,15 +157,6 @@ public class OnWindowCloseComparator implements OracleComparator {
 									} else if (newfMeasure.getPrecisionScore() == 1) {
 										endshift = endts;
 										prevfMeasure = newfMeasure;
-										logger.info("update:");
-										logger.info("expected bindings size: " + String.valueOf(expectedShift.getBindings().size()));
-										logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
-										logger.info("precision: " + prevfMeasure.getPrecisionScore());
-										logger.info("recall: " + prevfMeasure.getRecallScore());
-										logger.info("wsize: " + inputWindow.getTriples().size());
-										logger.info("actual start: "+actual.getStart()+" end: "+actual.getEnd());
-										logger.info("expected start: "+expectedShift.getEnd()+" end: "+expectedShift.getEnd());
-
 										break;
 									} else if (newfMeasure.getPrecisionScore() >= prevfMeasure.getPrecisionScore()) {
 										endshift = endts;
@@ -204,6 +198,8 @@ public class OnWindowCloseComparator implements OracleComparator {
 				break;
 			}
 		}
+		writer.close();
+		actual_writer.close();
 
 	}
 

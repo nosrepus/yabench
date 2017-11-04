@@ -39,6 +39,35 @@ public class EngineResultsReader implements AutoCloseable, Closeable {
         }
     }
 
+    public BindingWindow cqels_next() throws IOException {
+        if(empty) {
+            return null;
+        }
+
+        final long windowEndTimestamp = currentTimestamp - initialTimestamp;
+        final long windowStartTimestamp = windowEndTimestamp - windowSize > 0
+                ? windowEndTimestamp - windowSize : 0;
+
+        String line = reader.readLine();
+        if (line != null) {
+            final List<Binding> content = new ArrayList<>();
+            do {
+                if (line.contains(TAB)) {
+                    content.add(NodeUtils.toBinding(variables, line, TAB));
+                    break;
+                } else {
+                    currentTimestamp = Long.parseLong(line);
+                    break;
+                }
+            } while ((line = reader.readLine()) != null);
+            return new BindingWindow(content, windowStartTimestamp,
+                    windowEndTimestamp);
+        } else {
+            currentTimestamp = NOT_FOUND;
+            return null;
+        }
+    }
+
     public BindingWindow next() throws IOException {
         if(empty) {
             return null;

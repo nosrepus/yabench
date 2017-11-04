@@ -19,8 +19,8 @@ public class WindowFactory {
 
     public Window nextWindow() {
         numberOfSlides++;
-
-        final long windowEnd = numberOfSlides * slide.toMillis();
+	final long windowEnd = numberOfSlides * slide.toMillis();
+        //final long windowEnd = numberOfSlides * slide.toMillis()-900;
         final long windowStart = windowEnd - size.toMillis() > 0
                 ? windowEnd - size.toMillis() : 0;
 

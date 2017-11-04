@@ -48,7 +48,8 @@ public class Launcher extends AbstractLauncher {
             CommandLine cli = parser.parse(options, args, true);
 
             final File query = new File(cli.getOptionValue(ARG_QUERY_LONG));
-            final File inputStream = new File(cli.getOptionValue(ARG_INPUTSTREAM_LONG));
+            //final File inputStream = new File(cli.getOptionValue(ARG_INPUTSTREAM_LONG));
+            final File inputStream = new File("input_timestamp.txt");
             final File queryResults = new File(cli.getOptionValue(ARG_QUERYRESULTS_LONG));
             final File output = new File(cli.getOptionValue(ARG_OUTPUT_LONG));
             final boolean graceful = Boolean.parseBoolean(

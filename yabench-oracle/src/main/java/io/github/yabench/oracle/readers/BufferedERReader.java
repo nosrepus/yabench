@@ -15,6 +15,7 @@ public class BufferedERReader {
     }
 
     public BindingWindow next() throws IOException {
+//	final BindingWindow next = reader.cqels_next();
         final BindingWindow next = reader.next();
 
         buffer.add(next);

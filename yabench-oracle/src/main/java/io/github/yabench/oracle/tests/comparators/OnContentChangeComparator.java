@@ -1,5 +1,5 @@
 package io.github.yabench.oracle.tests.comparators;
-
+import io.github.yabench.oracle.*;
 import io.github.yabench.oracle.BindingWindow;
 import io.github.yabench.oracle.OracleResult;
 import io.github.yabench.oracle.readers.EngineResultsReader;
@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.hp.hpl.jena.sparql.engine.binding.Binding;
+import com.hp.hpl.jena.sparql.core.Var;
+import java.io.*;
+import java.util.Iterator;
 
 public class OnContentChangeComparator implements OracleComparator {
 
@@ -31,6 +35,8 @@ public class OnContentChangeComparator implements OracleComparator {
     private final OCCORWriter orWriter;
     private final boolean graceful;
     private final boolean singleResult;
+    private Writer writer = null;
+    private Writer actual_writer = null;
 
     OnContentChangeComparator(TripleWindowReader inputStreamReader,
             EngineResultsReader queryResultsReader,
@@ -46,6 +52,12 @@ public class OnContentChangeComparator implements OracleComparator {
                 windowFactory.getSize().toMillis());
         this.graceful = graceful;
         this.singleResult = singleResult;
+        try{
+        	this.writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("oracle_result.txt"), "utf-8"));
+                this.actual_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("actual_result.txt"), "utf-8"));
+        }catch(Exception ex){
+
+        }
     }
 
     @Override
@@ -53,9 +65,94 @@ public class OnContentChangeComparator implements OracleComparator {
         if (graceful) {
             compareInGraceful();
         } else {
-            compareInNonGraceful();
+            newcompare();
+            //compareInNonGraceful();
         }
     }
+
+    public void newcompare() throws IOException {
+        final OracleResultBuilder oracleResultBuilder = new OracleResultBuilder();
+        for (int i = 1;; i++) {
+            final Window window = windowFactory.nextWindow();
+            final BindingWindow actual = qrReader.next();
+            if (actual != null) {
+                for(Binding b: actual.getBindings()){
+                    Iterator<Var> it = b.vars();
+                    while(it.hasNext()){
+                        actual_writer.write(b.get(it.next()).toString()+'\t');
+                    }
+                    actual_writer.write('\n');
+                }
+                actual_writer.flush();
+                isReader.purge(window.getStart());
+                final TripleWindow inputWindow = isReader.readNextWindow(window);
+                //logger.info("-----------------window: "+inputWindow.getTriples().size());
+                if (inputWindow.getTriples().size()!=0) {
+                    
+                    BindingWindow expected = qexec.executeSelect(inputWindow);
+                    //logger.info("expected: "+expected.getBindings().size());
+                    //writer.write("start");
+
+                    for(Binding b: expected.getBindings()){
+                        Iterator<Var> it = b.vars();
+                        while(it.hasNext()){
+                            writer.write(b.get(it.next()).toString()+'\t');
+                        }
+                        writer.write('\n');
+                    }
+                    writer.flush();
+                    final FMeasure fMeasure = new FMeasure().calculateScores(expected.getBindings(), actual.getBindings());
+                    FMeasure prevfMeasure = fMeasure;
+
+                    if (!prevfMeasure.getNotFoundReferences().isEmpty()) {
+                        logger.info("Window #{} [{}:{}]. Missing triples:", i, window.getStart(), window.getEnd());
+                        logger.info("missing triples");
+                    }
+
+                    long startshift = (i * windowFactory.getSlide().toMillis()) - windowFactory.getSize().toMillis();
+                    long endshift = (i * windowFactory.getSlide().toMillis());
+
+                    //logger.info("expected bindings size: " + String.valueOf(expected.getBindings().size()));
+                    //logger.info("actual bindings size: " + String.valueOf(actual.getBindings().size()));
+                    //logger.info("precision: " + prevfMeasure.getPrecisionScore());
+                    //logger.info("recall: " + prevfMeasure.getRecallScore());
+                    //logger.info("wsize: " + inputWindow.getTriples().size());
+                    long delay = actual.getEnd() - expected.getEnd();
+
+                    if (!(expected.getBindings().size() == 0 && actual.getBindings().size() == 0)) {
+
+                    } else {
+                        logger.info("0 bindings!");
+                    }
+
+                    // todo: what if triple in the middle is missing? not
+                    // covered currently, because we assume that only triples at
+                    // window borders (start/end) can be missing
+
+                    if (!prevfMeasure.getNotFoundReferences().isEmpty()) {
+                        // logger.info("Window #{} [{}:{}]. Missing triples in loop:\n{}",
+                        // i, ts, this.windowFactory.getSize()
+                        // .toMillis(),
+                        // newfMeasure.getNotFoundReferences());
+                        logger.info("missing triples!");
+                    }
+
+                    startshift = startshift < 0 ? 0 : startshift;
+
+                    orWriter.write(oracleResultBuilder.fMeasure(prevfMeasure).resultSize(expected, actual)
+                            .expectedInputSize(inputWindow.getTriples().size()).startshift(startshift).endshift(endshift).delay(delay).build());
+                    
+                } else {
+//                    throw new IllegalStateException("Actual results have more windows than expected!");
+                }
+            } else {
+                break;
+            }
+        }
+        writer.close();
+        actual_writer.close();
+
+    }    
 
     public void compareInGraceful() throws IOException {
         BindingWindow current = null;
@@ -108,6 +205,7 @@ public class OnContentChangeComparator implements OracleComparator {
 
                                             if (!expected.isEmpty()) {
                                                 actual = qrReader.getOrNext(j++);
+						
 //                                                logger.debug("Next actual: {}", actual);
                                                 if (actual == null) {
                                                     break;
@@ -115,7 +213,7 @@ public class OnContentChangeComparator implements OracleComparator {
                                             }
                                         } else {
                                             if (tryPreviousWindow) {
-                                                logger.debug("Missing triples: {}", expected);
+                                                //logger.debug("Missing triples: {}", expected);
                                                 orWriter.writeMissing(
                                                         inputWindow, expected, actual);
 
@@ -165,7 +263,7 @@ public class OnContentChangeComparator implements OracleComparator {
                     logger.warn("There are still actual results!");
                     do {
                         orWriter.writeMissingExpected(actual);
-                        logger.debug("{}", actual);
+                        //logger.debug("{}", actual);
                     } while ((actual = qrReader.getOrNext(actualIndex++)) != null);
                 }
                 break;
@@ -180,22 +278,51 @@ public class OnContentChangeComparator implements OracleComparator {
         BindingWindow actual = null;
         do {
             final long nextTime = isReader.readTimestampOfNextTriple();
-            if (nextTime >= 0) {
+            //logger.info("time:"+nextTime);
+	    if (nextTime >= 0) {
                 final Window window = windowFactory.nextWindow(nextTime);
                 final TripleWindow inputWindow = isReader.readNextWindow(window);
-
-                final BindingWindow current = qexec.executeSelect(inputWindow);
-
-                if (!current.isEmpty()) {
+                //logger.info("inputWindow: {}", inputWindow);
+		final BindingWindow current = qexec.executeSelect(inputWindow);
+		//logger.debug("-------------------------size:"+current.getBindings().size()+"----------------------");
+                //logger.debug("oracle: {}", current);
+		if (!current.isEmpty()) {
                     List<BindingWindow> expected = WindowUtils
                             .diff(current, previous).split();
-                    if (!expected.isEmpty()) {
-//                        logger.debug("Expected: {}", expected);
+		    //logger.debug("--------------------diffsize:"+expected.size()+"-------------------------");
+                    //logger.debug("expected:");
+                    //logger.debug("{}", expected);
+                    //logger.debug("acutal:");
+                    //logger.debug("{}", actual);
+
+                    for(BindingWindow bw: expected){
+			for(Binding b : bw.getBindings()){
+                            Iterator<Var> it = b.vars();
+                            while(it.hasNext()){
+                                writer.write(b.get(it.next()).toString()+'\t');
+                            }
+                            writer.write('\n');
+			}
+                    }
+                    writer.flush();
+
+		    if (!expected.isEmpty()) {
+                        //logger.debug("Expected: {}", expected);
 
                         if (actual == null) {
                             actual = qrReader.next();
-                        }
-//                        logger.debug("Actual: {}", actual);
+ 			    if(actual != null){
+                            	for(Binding b: actual.getBindings()){
+                                	Iterator<Var> it = b.vars();
+                                	while(it.hasNext()){
+                                        	actual_writer.write(b.get(it.next()).toString()+'\t');
+                                	}
+                                	actual_writer.write('\n');
+                            	}
+			    	actual_writer.flush();
+			    }
+	                }
+                        //logger.debug("Actual: {}", actual);
 
                         if (actual != null) {
                             FindResult result = find(inputWindow, expected, actual);
@@ -203,11 +330,35 @@ public class OnContentChangeComparator implements OracleComparator {
 
                             if(actual != null && !result.matched) {
                                 if (singleResult) {
-                                    actual = null;
-                                } else {
+                                    //actual = null;
                                     do {
                                         if((actual = qrReader.next()) != null) {
-//                                            logger.debug("Actual (S): {}", actual);
+                        		
+					    for(Binding b: actual.getBindings()){
+                                		Iterator<Var> it = b.vars();
+                                		while(it.hasNext()){
+                                        		actual_writer.write(b.get(it.next()).toString()+'\t');
+                                		}
+                                		actual_writer.write('\n');
+                        		    }
+					    actual_writer.flush();
+			                
+					    //logger.debug("Actual (S): {}", actual);
+                                            result = find(inputWindow, expected, actual);
+                                            actual = result.actual;
+                                        }
+                                    } while (actual != null && !result.matched);
+                                } else {
+                                    do {
+					if((actual = qrReader.next()) != null) {
+	                                    for(Binding b: actual.getBindings()){
+        	                        	Iterator<Var> it = b.vars();
+                	                        while(it.hasNext()){
+                        	        		actual_writer.write(b.get(it.next()).toString()+'\t');
+                                	        }
+                                        	actual_writer.write('\n');
+                                       	    }
+					    //logger.debug("Actual (S): {}", actual);
                                             result = find(inputWindow, expected, actual);
                                             actual = result.actual;
                                         }
@@ -215,9 +366,9 @@ public class OnContentChangeComparator implements OracleComparator {
                                 }
                             }
                         } else {
-                            logger.debug(
-                                    "Expected, but there are no actual results anymore: {}",
-                                    expected);
+                            //logger.debug(
+                            //        "Expected, but there are no actual results anymore: {}",
+                            //        expected);
                             orWriter.writeMissingActual(expected);
                         }
 
@@ -228,9 +379,18 @@ public class OnContentChangeComparator implements OracleComparator {
                         - windowFactory.getWindowSize().toMillis());
             } else {
                 if ((actual = qrReader.next()) != null) {
-                    logger.debug("Didn't find expected for:");
+                    //logger.debug("Didn't find expected for:");
                     do {
-                        logger.debug("{}", actual);
+                       for(Binding b: actual.getBindings()){
+                                Iterator<Var> it = b.vars();
+                                while(it.hasNext()){
+                                        actual_writer.write(b.get(it.next()).toString()+'\t');
+                                }
+                                actual_writer.write('\n');
+                        }
+                        actual_writer.flush();
+
+                        //logger.debug("NOT INPUT: {}", actual);
                         orWriter.writeMissingExpected(actual);
                     } while ((actual = qrReader.next()) != null);
                 }
@@ -238,7 +398,8 @@ public class OnContentChangeComparator implements OracleComparator {
                 break;
             }
         } while (true);
-
+	writer.close();
+	actual_writer.close();
         orWriter.flush();
     }
 
@@ -251,23 +412,45 @@ public class OnContentChangeComparator implements OracleComparator {
             final BindingWindow found = WindowUtils.findMatch(actual, results);
             if (found != null) {
                 result.matched = true;
-//                logger.debug("Found: {}", found);
+                //logger.debug("Found: {}", found);
 
                 results.remove(found);
 
                 orWriter.writeFound(inputWindow, found, actual);
 
                 if (!results.isEmpty() && (actual = qrReader.next()) == null) {
-                    logger.warn(
+                        
+			for(Binding b: actual.getBindings()){
+                                Iterator<Var> it = b.vars();
+                                while(it.hasNext()){
+                                        actual_writer.write(b.get(it.next()).toString()+'\t');
+                                }
+                                actual_writer.write('\n');
+                        }
+			actual_writer.flush();
+			
+		    //logger.info("actual 2: {}", actual);
+		    logger.warn(
                             "Expected, but there are no actual results anymore: {}",
                             results);
 
                     orWriter.writeMissingActual(results);
                     return result;
                 }
+		if (!results.isEmpty() && actual!=null) {
+                        for(Binding b: actual.getBindings()){
+                                Iterator<Var> it = b.vars();
+                                while(it.hasNext()){
+                                        actual_writer.write(b.get(it.next()).toString()+'\t');
+                                }
+                                actual_writer.write('\n');
+                        }
+                        actual_writer.flush();
+		}
+
             } else {
-                logger.debug("Expected, but haven't found: {}", results);
-//                logger.debug("It was: {}", actual);
+                //logger.debug("Expected, but haven't found: {}", results);
+                //logger.debug("It was: {}", actual);
                 orWriter.writeMissing(inputWindow, results, actual);
 
                 result.actual = actual;
@@ -315,6 +498,7 @@ public class OnContentChangeComparator implements OracleComparator {
 
         public void writeMissingActual(BindingWindow expected) throws IOException {
             final OracleResultBuilder builder = new OracleResultBuilder();
+	    //logger.info("###################missing actual#######################");
             write(builder
                     .precision(ONE)
                     .recall(ZERO)
@@ -330,6 +514,7 @@ public class OnContentChangeComparator implements OracleComparator {
             while ((numberOfSlides + 1) * windowSlide < actual.getEnd()) {
                 numberOfSlides++;
             }
+	    //logger.info("^^^^^^^^^^^^^^^^^missing expected^^^^^^^^^^^^^^^^^^^^");
             final OracleResultBuilder builder = new OracleResultBuilder();
             write(builder
                     .precision(ZERO)
@@ -350,6 +535,7 @@ public class OnContentChangeComparator implements OracleComparator {
         public void writeMissing(TripleWindow inputWindow,
                 BindingWindow expected, BindingWindow actual)
                 throws IOException {
+		//logger.info("*****************missing************");
             final OracleResultBuilder builder = new OracleResultBuilder();
             write(builder
                     .precision(ZERO)
@@ -366,6 +552,7 @@ public class OnContentChangeComparator implements OracleComparator {
         public void writeFound(BindingWindow expected, TripleWindow input,
                 int actualResults) throws IOException {
             final OracleResultBuilder builder = new OracleResultBuilder();
+		//logger.info("------------------found--------------");
             write(builder
                     .precision(ONE)
                     .recall(ONE)
@@ -380,6 +567,7 @@ public class OnContentChangeComparator implements OracleComparator {
         public void writeFound(TripleWindow inputWindow,
                 BindingWindow expected, BindingWindow actual)
                 throws IOException {
+		//logger.info("-----------------found-----------------");
             final OracleResultBuilder builder = new OracleResultBuilder();
             write(builder
                     .precision(ONE)
@@ -427,7 +615,8 @@ public class OnContentChangeComparator implements OracleComparator {
                 throws IOException {
             final OracleResultBuilder builder = new OracleResultBuilder();
             for (int i = current; i < slides; i++) {
-                super.write(builder
+                //logger.info("++++++++++++++++empty+++++++++++++++++");
+		super.write(builder
                         .precision(ONE)
                         .recall(ONE)
                         .startshift(i * windowSlide)
@@ -454,6 +643,8 @@ public class OnContentChangeComparator implements OracleComparator {
                 precision += r.getPrecision();
                 recall += r.getRecall();
                 actualRS += r.getActualResultSize();
+                //logger.info("expected result r: "+r.getExpectedResultSize());
+
                 expectedRS += r.getExpectedResultSize();
                 delay += r.getDelay() > 0 ? r.getDelay() : 0;
                 delayNum += r.getDelay() > 0 ? 1 : 0;
@@ -480,12 +671,20 @@ public class OnContentChangeComparator implements OracleComparator {
                             windowStart, windowStart + windowSize))
                     .actualResultSize(actualRS)
                     .build();
+/*
+            logger.info("result.size: "+results.size());            
+            logger.info("expected bindings size: " + String.valueOf(expectedRS));
+            logger.info("actual bindings size: " + String.valueOf(actualRS));
+            logger.info("precision: " + precision/divisor);
+            logger.info("recall: " + recall/divisor);
+            logger.info("wsize: " + erReader.sizeOfGraph(
+                    windowStart, windowStart + windowSize));
+*/
             return windowResult;
         }
 
         public void flush() throws IOException {
-            final OracleResult windowResult = merge(results);
-
+	    final OracleResult windowResult = merge(results);
             super.write(windowResult);
         }
 

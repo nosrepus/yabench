@@ -23,6 +23,8 @@ public class CSPARQLEngine extends AbstractEngine {
     private CsparqlEngine engine;
     private final RdfStream stream;
     private CsparqlQueryResultProxy csparqlProxy;
+    private static final Logger logger = LoggerFactory.getLogger(AbstractEngineLauncher.class);
+
 
     public CSPARQLEngine() {
         this.engine = new CsparqlEngineImpl();
@@ -33,7 +35,7 @@ public class CSPARQLEngine extends AbstractEngine {
     public void initialize() {
         engine.initialize();
         engine.registerStream(stream);
-//        engine.putStaticNamedModel("http://github.com/nosrepus/UWaterloo-WatDiv/raw/master/tiny.ttl", "/home/l36gao/UWaterloo-WatDiv/bin/Release/1-1/1-1.ttl");
+        engine.putStaticNamedModel("http://dsg.uwaterloo.ca/watdiv/knowledge", "/hdd1/watdiv/data/1-100.ttl");
     }
 
     @Override
@@ -58,6 +60,8 @@ public class CSPARQLEngine extends AbstractEngine {
 
     @Override
     public void stream(Statement stmt) {
+        //logger.info(stmt.toString());
+        //logger.info("time:"+System.currentTimeMillis());
         stream.put(new RdfQuadruple(
                 stmt.getSubject().toString(),
                 stmt.getPredicate().toString(),

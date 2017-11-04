@@ -34,7 +34,37 @@ public class TripleWindowReader implements Closeable, AutoCloseable {
 	protected TemporalRDFReader getReader() {
 		return reader;
 	}
+	
+	private TemporalTriple next = null;
 
+	public TripleWindow readNextWindow(final Window window) throws IOException {
+		content = new ArrayList<>(Arrays.asList(content.stream().filter((triple) -> triple.getTime() >= window.getStart())
+				.toArray(TemporalTriple[]::new)));
+		if(next == null){
+			next = reader.readNextTriple();
+		}
+		//cqels: with '=', while for csparql, without '='
+		while(next!=null&&next.getTime()<=window.getEnd()){
+			content.add(next);
+			next = reader.readNextTriple();
+		}
+
+		final TripleWindow w = new TripleWindow(new ArrayList<>(content), window.getStart(), window.getEnd());
+		return w;
+	}
+
+	public long readTimestampOfNextTriple() throws IOException {
+		if(next == null){
+			next = reader.readNextTriple();
+		}
+		if(next != null)
+			return next.getTime();
+		else
+			return NOT_FOUND;
+	}
+
+
+/*
 	public TripleWindow readNextWindow(final Window window) throws IOException {
 		content = new ArrayList<>(Arrays.asList(content.stream().filter((triple) -> triple.getTime() >= window.getStart())
 				.toArray(TemporalTriple[]::new)));
@@ -59,6 +89,7 @@ public class TripleWindowReader implements Closeable, AutoCloseable {
 
 	public long readTimestampOfNextTriple() throws IOException {
 		TemporalTriple triple = reader.readNextTriple();
+		//logger.info(triple.toString());
 		if (triple != null) {
 			content.add(triple);
 			return triple.getTime();
@@ -66,7 +97,7 @@ public class TripleWindowReader implements Closeable, AutoCloseable {
 			return NOT_FOUND;
 		}
 	}
-
+*/
 	public long readTimestampOfNextGraph() throws IOException {
 		TemporalGraph graph = reader.readNextGraph();
 		long retTime = NOT_FOUND;

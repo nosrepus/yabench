@@ -12,19 +12,6 @@ public class RDFStreamReaderTest {
     @Test
     public void test() throws IOException {
         final String stream
-                = "http://db.uwaterloo.ca/~galuc/wsdbm/Review152\t"
-                + "http://purl.org/stuff/rev#text\t"
-                + "\"Hartline environment's Marcy's hereupon curt ran propellers\"\t"
-                + "0.000014";
-
-        StringReader input = new StringReader(stream);
-        TemporalRDFReader reader = new TemporalRDFReader(input);
-
-        assertEquals(ResourceFactory.createTypedLiteral("Hartline environment's Marcy's hereupon curt ran propellers", XSDDatatype.XSDstring),
-                reader.readNextTriple().getStatement().getObject().asLiteral());
-
-        /*
-        final String stream
                 = "<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A7_0> "
                 + "<http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> "
                 + "15.0^^<http://www.w3.org/2001/XMLSchema#float> \"0\" .";
@@ -34,6 +21,5 @@ public class RDFStreamReaderTest {
 
         assertEquals(ResourceFactory.createTypedLiteral("15.0", XSDDatatype.XSDfloat),
                 reader.readNextTriple().getStatement().getObject().asLiteral());
-        */
     }
 }

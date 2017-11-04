@@ -1,51 +1,70 @@
-http://db.uwaterloo.ca/~galuc/wsdbm/User339     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User13      0.00018094
-http://db.uwaterloo.ca/~galuc/wsdbm/User614     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User122     0.000192486
-http://db.uwaterloo.ca/~galuc/wsdbm/User760     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User988     0.000232381
-http://db.uwaterloo.ca/~galuc/wsdbm/User139     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User896     0.000286067
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://schema.org/eligibleQuantity      "2"     0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://purl.org/goodrelations/validThrough      "2013-11-30"    0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://purl.org/goodrelations/validFrom "2013-01-01"    0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://purl.org/goodrelations/price     "102"   0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://purl.org/goodrelations/serialNumber      "72667737"      0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Retailer10  http://purl.org/goodrelations/offers    http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer28     http://purl.org/goodrelations/includes  http://db.uwaterloo.ca/~galuc/wsdbm/Product205  0.000292
-http://db.uwaterloo.ca/~galuc/wsdbm/User251     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User827     0.000303775
-http://db.uwaterloo.ca/~galuc/wsdbm/Review1001  http://purl.org/stuff/rev#text  "EMILY LORENZO TABATHA ERNA DEAN ROSETTA BERTA ELVIA STELLA SHANNON TANYA ROSEMARY ETHAN RICKY ROSALYN SHAUN BRITNEY CHRYSTAL LATANYA LORNA"    0.000310
-http://db.uwaterloo.ca/~galuc/wsdbm/Review1001  http://purl.org/stuff/rev#rating        "3"     0.000310
-http://db.uwaterloo.ca/~galuc/wsdbm/Review1001  http://purl.org/stuff/rev#reviewer      http://db.uwaterloo.ca/~galuc/wsdbm/User369     0.000310
-http://db.uwaterloo.ca/~galuc/wsdbm/Product156  http://purl.org/stuff/rev#hasReview     http://db.uwaterloo.ca/~galuc/wsdbm/Review1001  0.000310
-http://db.uwaterloo.ca/~galuc/wsdbm/User449     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User818     0.000320825
-                                                                                                                                                  1,1           Top
-http://db.uwaterloo.ca/~galuc/wsdbm/User138     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User684     0.0297113
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    http://schema.org/eligibleQuantity      "2"     0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    http://purl.org/goodrelations/validThrough      "2013-11-12"    0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    http://purl.org/goodrelations/price     "594"   0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    http://purl.org/goodrelations/serialNumber      "32029890"      0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/Retailer7   http://purl.org/goodrelations/offers    http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/Offer491    http://purl.org/goodrelations/includes  http://db.uwaterloo.ca/~galuc/wsdbm/Product16   0.029722
-http://db.uwaterloo.ca/~galuc/wsdbm/User637     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User136     0.0297488
-http://db.uwaterloo.ca/~galuc/wsdbm/User418     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User490     0.0297867
-http://db.uwaterloo.ca/~galuc/wsdbm/User211     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User270     0.0297907
-http://db.uwaterloo.ca/~galuc/wsdbm/Review237   http://purl.org/stuff/rev#text  "GABRIEL GEORGETTE THOMAS LESA" 0.029840
-http://db.uwaterloo.ca/~galuc/wsdbm/Review237   http://purl.org/stuff/rev#rating        "0"     0.029840
-http://db.uwaterloo.ca/~galuc/wsdbm/Review237   http://purl.org/stuff/rev#reviewer      http://db.uwaterloo.ca/~galuc/wsdbm/User56      0.029840
-http://db.uwaterloo.ca/~galuc/wsdbm/Product196  http://purl.org/stuff/rev#hasReview     http://db.uwaterloo.ca/~galuc/wsdbm/Review237   0.029840
-http://db.uwaterloo.ca/~galuc/wsdbm/User574     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User526     0.0298497
-http://db.uwaterloo.ca/~galuc/wsdbm/User0       http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User824     0.0298531
-http://db.uwaterloo.ca/~galuc/wsdbm/User117     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User309     0.0298729
-http://db.uwaterloo.ca/~galuc/wsdbm/User153     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User478     0.0298799
-http://db.uwaterloo.ca/~galuc/wsdbm/User790     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User346     0.029888
-http://db.uwaterloo.ca/~galuc/wsdbm/User502     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User901     0.0298967
-http://db.uwaterloo.ca/~galuc/wsdbm/User357     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User316     0.0299716
-http://db.uwaterloo.ca/~galuc/wsdbm/User201     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User478     0.0299729
-http://db.uwaterloo.ca/~galuc/wsdbm/User478     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User596     0.0299998
-http://db.uwaterloo.ca/~galuc/wsdbm/User157     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User640     0.0300013
-http://db.uwaterloo.ca/~galuc/wsdbm/User968     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User380     0.0300137
-http://db.uwaterloo.ca/~galuc/wsdbm/User718     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User362     0.0300247
-http://db.uwaterloo.ca/~galuc/wsdbm/User970     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User761     0.0300415
-http://db.uwaterloo.ca/~galuc/wsdbm/User287     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User138     0.0300528
-http://db.uwaterloo.ca/~galuc/wsdbm/User874     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User51      0.0300637
-http://db.uwaterloo.ca/~galuc/wsdbm/User200     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User203     0.030102
-http://db.uwaterloo.ca/~galuc/wsdbm/User815     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User361     0.0301115
-http://db.uwaterloo.ca/~galuc/wsdbm/User442     http://db.uwaterloo.ca/~galuc/wsdbm/subscribes  http://db.uwaterloo.ca/~galuc/wsdbm/Website10   0.0301431
-http://db.uwaterloo.ca/~galuc/wsdbm/User368     http://db.uwaterloo.ca/~galuc/wsdbm/follows     http://db.uwaterloo.ca/~galuc/wsdbm/User23      0.0301691
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_24091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "24091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_24091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "24091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_24091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "24091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_24091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_24091> "24091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_24091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "24091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_24091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 56.0^^<http://www.w3.org/2001/XMLSchema#float> "24091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_24091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "24091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_54091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "54091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_54091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "54091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_54091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "54091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_54091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_54091> "54091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_54091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "54091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_54091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 18.0^^<http://www.w3.org/2001/XMLSchema#float> "54091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_54091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "54091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_84091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "84091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_84091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "84091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_84091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "84091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_84091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_84091> "84091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_84091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "84091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_84091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 45.0^^<http://www.w3.org/2001/XMLSchema#float> "84091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_84091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "84091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_114091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "114091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_114091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "114091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_114091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "114091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_114091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_114091> "114091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_114091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "114091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_114091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 71.0^^<http://www.w3.org/2001/XMLSchema#float> "114091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_114091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "114091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_144091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "144091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_144091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "144091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_144091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "144091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_144091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_144091> "144091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_144091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "144091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_144091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 91.0^^<http://www.w3.org/2001/XMLSchema#float> "144091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_144091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "144091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_174091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "174091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_174091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "174091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_174091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "174091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_174091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_174091> "174091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_174091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "174091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_174091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 55.0^^<http://www.w3.org/2001/XMLSchema#float> "174091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_174091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "174091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_204091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "204091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_204091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "204091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_204091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "204091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_204091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_204091> "204091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_204091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "204091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_204091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 26.0^^<http://www.w3.org/2001/XMLSchema#float> "204091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_204091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "204091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_234091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "234091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_234091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "234091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_234091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "234091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_234091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_234091> "234091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_234091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "234091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_234091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 70.0^^<http://www.w3.org/2001/XMLSchema#float> "234091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_234091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "234091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_264091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "264091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_264091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "264091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_264091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "264091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_264091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_264091> "264091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_264091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "264091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_264091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 27.0^^<http://www.w3.org/2001/XMLSchema#float> "264091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_264091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "264091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_294091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/weather.owl#TemperatureObservation> "294091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_294091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#observedProperty> <http://knoesis.wright.edu/ssw/ont/weather.owl#_AirTemperature> "294091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_294091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#procedure> <http://knoesis.wright.edu/ssw/System_A0> "294091" .
+<http://knoesis.wright.edu/ssw/Observation_AirTemperature_A0_294091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#result> <http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_294091> "294091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_294091> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#MeasureData> "294091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_294091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#floatValue> 42.0^^<http://www.w3.org/2001/XMLSchema#float> "294091" .
+<http://knoesis.wright.edu/ssw/MeasureData_AirTemperature_A0_294091> <http://knoesis.wright.edu/ssw/ont/sensor-observation.owl#uom> <http://knoesis.wright.edu/ssw/ont/weather.owl#fahrenheit> "294091" .

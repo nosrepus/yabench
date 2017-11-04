@@ -55,7 +55,11 @@ public final class WindowUtils {
             return new BindingWindow(bindings, one.getStart(), one.getEnd());
         } else {
             bindings.addAll(one.getBindings());
-            bindings.removeAll(two.getBindings());
+            for(Binding b:two.getBindings()){
+                bindings.remove(b);
+            }
+
+//            bindings.removeAll(two.getBindings());
         }
         return new BindingWindow(bindings, one.getStart(), one.getEnd());
     }

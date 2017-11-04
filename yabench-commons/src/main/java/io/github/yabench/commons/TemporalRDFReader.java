@@ -47,8 +47,8 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
     public TemporalTriple readNextTriple() throws IOException {
         final String line = reader.readLine();
         if (line != null) {
-
-            String[] tuple = line.split("\t");
+	    
+	    String[] tuple = line.split("\t");
             Resource subject = ResourceFactory.createResource(tuple[0]);
             Property predicate = ResourceFactory.createProperty(tuple[1]);
             RDFNode object = createObject(tuple[2]);
@@ -59,8 +59,9 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
             long time = Long.parseLong(tuple[3]);
 
             return new TemporalTriple(stmt, time);
-            /*
-            String[] tuple = line.split(SPACE, TUPLE_SIZE + 1);
+            
+	    /*
+	    String[] tuple = line.split(SPACE, TUPLE_SIZE + 1);
             Resource subject = ResourceFactory.createResource(
                     tuple[0].substring(1, tuple[0].length() - 1));
             Property predicate = ResourceFactory.createProperty(
@@ -73,7 +74,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
                     .substring(1, tuple[TUPLE_SIZE - 1].length() - 1));
 
             return new TemporalTriple(stmt, time);
-            */
+	    */
         } else {
             return null;
         }
@@ -85,19 +86,20 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
         //if (lastTriple != null) {
         //    triples.add(lastTriple);
         //}
-        /*
-        for (;;) {
-            final TemporalTriple triple = readNextTriple();
-            if (triple != null) {
-                triples.add(triple);
-                lastTriple = triple;
-                break;
-            } else {
-                lastTriple = null;
-                break;
-            }
-        }
-        */
+	for(;;) {
+	    if(lastTriple==null){
+		lastTriple = readNextTriple();	    
+		if(lastTriple == null) break;
+	    }
+	    triples.add(lastTriple);
+	    final TemporalTriple triple = readNextTriple();
+	    if(triple==null||triple.getTime()!=lastTriple.getTime()){
+		lastTriple = triple;
+		break;
+	    }
+	    lastTriple = triple;
+	}
+/*
         for (;;) {
             final TemporalTriple triple = readNextTriple();
             if (triple != null) {
@@ -119,6 +121,7 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
                 break;
             }
         }
+*/
         return triples.isEmpty() ? null : new TemporalGraph(triples);
     }
 
@@ -128,19 +131,19 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
      */
     private RDFNode createObject(String tuple) {
         //if it is datatyped...
-        // literal format: "something"
         if (tuple.contains("\"")) {
             String objectString = tuple.substring(1, tuple.length()-1);
-            return ResourceFactory.createTypedLiteral(objectString);
+            if(isNum(objectString)){
+	    	return ResourceFactory.createTypedLiteral(objectString, XSDDatatype.XSDint);
+	    }else
+		return ResourceFactory.createTypedLiteral(objectString);
         } else {
             return ResourceFactory.createResource(
                     tuple);
         }
-
-
-        /*
+/*
         if (tuple.contains("^^")) {
-            String[] objectSplit = tuple.split("\"");
+            String[] objectSplit = tuple.split("\\^\\^");
             String objectString = objectSplit[0];
             String dtype = objectSplit[1];
 
@@ -155,8 +158,14 @@ public class TemporalRDFReader implements Closeable, AutoCloseable {
             return ResourceFactory.createResource(
                     tuple.substring(1, tuple.length() - 1));
         }
-        */
+*/
+    }
 
+    private Boolean isNum(String in){
+        for(int i = 0; i<in.length(); i++){
+            if(in.charAt(i)>'9'||in.charAt(i)<'0') return false;
+        }
+        return true;
     }
 
     @Override

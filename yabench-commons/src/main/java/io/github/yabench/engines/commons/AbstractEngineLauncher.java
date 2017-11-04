@@ -72,47 +72,6 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					engine.initialize();
 					final ResultSerializer serializer = new ResultSerializer(writer);
 					TemporalGraph graph;
-					long interval = 0, prev = 0, last_triple = 0, sleep = 0;
-					logger.info("querystring: "+query.getQueryString());
-					engine.registerQuery(query, serializer);
-					Thread.sleep(1000); //provide setup time for the engine before starting to stream
-					serializer.initialize();
-					logger.info("started sending triples at {}", Instant.now());
-					while ((graph = reader.readNextGraph()) != null) {
-						interval = (System.nanoTime() - prev) / 1000000;
-						sleep = graph.getTime() - last_triple - interval < 0 ? 0 : graph.getTime() - last_triple - interval;
-						Thread.sleep(sleep);
-						prev = System.nanoTime();
-						for (TemporalTriple triple : graph.getTriples()) {
-							executor.execute(new Runnable() {
-								@Override
-								public void run() {
-									engine.stream(triple.getStatement());
-								}
-							});
-							logger.info("-----------------------triple-------------------------");
-							logger.info(triple.toString());
-							//engine.stream(triple.getStatement());
-						}
-						//logger.info("streamed graph with t: "+System.nanoTime() + " "+graph.getTriples().size()+" "+ graph.getTriples().get(0).toString());
-						last_triple = graph.getTime();
-					}
-
-					logger.info("stopped sending triples at {}", Instant.now());
-
-					executor.shutdown();
-					//executor.shutdownNow();
-					executor.awaitTermination(500, TimeUnit.MINUTES);
-					t.interrupt();
-					onInputStreamEnd();
-
-					logger.info("stopped the engine at {}", Instant.now());
-				}
-				/*
-				try (Engine engine = engineFactory.create()) {
-					engine.initialize();
-					final ResultSerializer serializer = new ResultSerializer(writer);
-					TemporalGraph graph;
 					long t1 = 0, t2 = 0, time = 0, sleep = 0;
 					engine.registerQuery(query, serializer);
 					Thread.sleep(1000); //provide setup time for the engine before starting to stream
@@ -120,8 +79,8 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					logger.info("started sending triples at {}", Instant.now());
 					while ((graph = reader.readNextGraph()) != null) {
 						t1 = (System.nanoTime() - t2) / 1000000;
-						sleep = graph.getTime() - time - t1 < 0 ? graph.getTime() - time : graph.getTime() - time - t1;
-						Thread.sleep(sleep);
+						sleep = graph.getTime() - time - t1 < 0 ? 0 : graph.getTime() - time - t1;
+						if(sleep!=0) Thread.sleep(sleep);
 						t2 = System.nanoTime();
 						for (TemporalTriple triple : graph.getTriples()) {
 					        executor.execute(new Runnable() {
@@ -131,6 +90,7 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 					            }
 					        });
 							//engine.stream(triple.getStatement());
+						    //logger.info(triple.toString());
 						}
 						//logger.info("streamed graph with t: " + graph.getTime());
 						time = graph.getTime();
@@ -146,7 +106,6 @@ public abstract class AbstractEngineLauncher extends AbstractLauncher {
 
 					logger.info("stopped the engine at {}", Instant.now());
 				}
-				*/
 			}
 		} catch (ParseException ex) {
 			printHelp(options, ex.getMessage());

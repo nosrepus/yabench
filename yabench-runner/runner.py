@@ -161,7 +161,7 @@ def runEngine(testDir, resultsDir, config):
 
     print(run_args)
 
-    ptimer = ProcessTimer(run_args, "{}/{}{}{}".format(resultsDir, PERFORMANCERESULTS_PREFIX, config['name'], config['suffix']), config)
+    ptimer = ProcessTimer(run_args, "{}/{}{}{}".format(resultsDir, PERFORMANCERESULTS_PREFIX, config['name'], config['suffix']),config)
 
     try:
         ptimer.execute()
